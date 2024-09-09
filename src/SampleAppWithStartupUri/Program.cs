@@ -1,8 +1,12 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Avalonia;
+using Microsoft.Extensions.Hosting;
 using SampleAppWithStartupUri;
-using Wpf.Extensions.Hosting;
+using Avalonia.Extensions.Hosting;
 
-var builder = WpfApplication<App, MainWindow>.CreateBuilder(args);
+var builder = AvaloniaApplication<App, MainWindow>.CreateBuilder(args);
+
+builder.Host.ConfigureAvaloniaAppBuilder((context, appBuilder) =>
+    appBuilder.UsePlatformDetect().WithInterFont().LogToTrace().SetupWithClassicDesktopLifetime(args));
 
 var app = builder.Build();
 

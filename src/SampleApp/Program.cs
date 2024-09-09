@@ -1,11 +1,15 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Avalonia;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SampleApp;
 using Serilog;
-using Wpf.Extensions.Hosting;
+using Avalonia.Extensions.Hosting;
 
 // Create a builder by specifying the application and main window.
-var builder = WpfApplication<App, MainWindow>.CreateBuilder(args);
+var builder = AvaloniaApplication<App, MainWindow>.CreateBuilder(args);
+
+builder.Host.ConfigureAvaloniaAppBuilder((context, appBuilder) =>
+    appBuilder.UsePlatformDetect().WithInterFont().LogToTrace().SetupWithClassicDesktopLifetime(args));
 
 // Configure dependency injection.
 // Injecting MainWindowViewModel into MainWindow.

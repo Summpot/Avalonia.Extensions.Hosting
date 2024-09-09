@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="GettingStarted/App.axaml" value="GettingStarted/GettingStarted.csproj" />
+        <entry key="GettingStarted/MainWindow.axaml" value="GettingStarted/GettingStarted.csproj" />
+        <entry key="SampleApp/App.axaml" value="SampleApp/SampleApp.csproj" />
+        <entry key="SampleApp/MainWindow.axaml" value="SampleApp/SampleApp.csproj" />
+        <entry key="SampleAppWithStartupUri/App.axaml" value="SampleAppWithStartupUri/SampleAppWithStartupUri.csproj" />
+        <entry key="SampleAppWithStartupUri/MainWindow.axaml" value="SampleAppWithStartupUri/SampleAppWithStartupUri.csproj" />
+      </map>
+    </option>
+  </component>
+</project>

@@ -1,16 +1,20 @@
-# Wpf.Extensions.Hosting
+# Avalonia.Extensions.Hosting
 
-[The Japanese document is here.](README-jp.md)
+This is a port of [nuitsjp](https://github.com/nuitsjp)'s [Wpf.Extensions.Hosting](https://github.com/nuitsjp/Wpf.Extensions.Hosting) from WPF to Avalonia.
 
-Wpf.Extensions.Hosting is a library for running WPF applications on Generic Host.
+> [!WARNING]
+>
+> Working in progress, no available now.
+
+Avalonia.Extensions.Hosting is a library for running Avalonia applications on Generic Host.
 
 Many of the modern libraries in .NET are provided for Generic Hosts. By using this library, you can take advantage of the latest and greatest set of libraries provided for .   
 
-This library allows you to write WPF on Generic Host in a simple and intuitive way, just like .NET6.
+This library allows you to write Avalonia on Generic Host in a simple and intuitive way, just like .NET6.
 
 ```csharp
 // Create a builder by specifying the application and main window.
-var builder = WpfApplication<App, MainWindow>.CreateBuilder(args);
+var builder = AvaloniaApplication<App, MainWindow>.CreateBuilder(args);
 
 // Configure dependency injection.
 // Injecting MainWindowViewModel into MainWindow.
@@ -37,13 +41,17 @@ await app.RunAsync();
 
 ## Getting Started
 
-Create a WPF project and add the package from NuGet.
+Create a Avalonia project and add the package from NuGet.
 
-NuGet :[Wpf.Extensions.Hosting](https://www.nuget.org/packages/Wpf.Extensions.Hosting)
+NuGet :[Extensions.Hosting.Avalonia](https://www.nuget.org/packages/Extensions.Hosting.Avalonia)
 
 ```
-Install-Package Wpf.Extensions.Hosting
+Install-Package Extensions.Hosting.Avalonia
 ```
+
+> [!CAUTION]
+>
+> Since Avalonia is a reserved prefix for Avalonia, the package ID is not the same as the project name.
 
 Stop the automatic generation of the application entry point (Main method). Open the .csproj file and set EnableDefaultApplicationDefinition to false.
 
@@ -54,12 +62,13 @@ Stop the automatic generation of the application entry point (Main method). Open
 		<OutputType>WinExe</OutputType>
 		<TargetFramework>net6.0-windows</TargetFramework>
 		<Nullable>enable</Nullable>
-		<UseWPF>true</UseWPF>
-		<EnableDefaultApplicationDefinition>false</EnableDefaultApplicationDefinition>
+		<BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+		<ApplicationManifest>app.manifest</ApplicationManifest>
+		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Wpf.Extensions.Hosting" Version="0.0.3" />
+		<PackageReference Include="Extensions.Hosting.Avalonia" Version="1.0.0" />
 	</ItemGroup>
 
 </Project>
@@ -70,7 +79,7 @@ Delete the description of StartupUri from App.xaml.
 
 ```xml
 <Application x:Class="GettingStarted.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:GettingStarted">
     <Application.Resources>
@@ -91,13 +100,13 @@ Add a constructor to App.xaml.cs.
     }
 ```
 
-Create a Program.cs file and run the WPF application on the Generic Host.
+Create a Program.cs file and run the Avalonia application on the Generic Host.
 
 ```csharp
 using GettingStarted;
 
 // Create a builder by specifying the application and main window.
-var builder = WpfApplication<App, MainWindow>.CreateBuilder(args);
+var builder = AvaloniaApplication<App, MainWindow>.CreateBuilder(args);
 
 // Build and run the application.
 var app = builder.Build();
@@ -136,7 +145,3 @@ builder.Services.AddTransient<MainWindowViewModel>();
 ```
 
 In this way, all the features of Generic Host are available.
-
-## .NET Foundation
-
-This project is part of the [.NET Foundation](http://www.dotnetfoundation.org/projects).
