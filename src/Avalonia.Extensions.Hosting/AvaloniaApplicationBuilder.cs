@@ -1,6 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System.Runtime.InteropServices;
 using Avalonia.Controls;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -97,8 +98,8 @@ namespace Avalonia.Extensions.Hosting
         /// <returns>A configured <see cref="AvaloniaApplication{TApplication,TWindow}"/>.</returns>
         public AvaloniaApplication<TApplication, TWindow> Build()
         {
-            // 
-            if (!Thread.CurrentThread.TrySetApartmentState(ApartmentState.STA))
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) &&
+                !Thread.CurrentThread.TrySetApartmentState(ApartmentState.STA))
             {
                 Thread.CurrentThread.SetApartmentState(ApartmentState.Unknown);
                 Thread.CurrentThread.SetApartmentState(ApartmentState.STA);
@@ -154,17 +155,17 @@ namespace Avalonia.Extensions.Hosting
                 // at this point. HostBuilder news up a new ServiceCollection in HostBuilder.Build() we haven't seen
                 // until now, so we cannot clear these services even though some are redundant because
                 // we called ConfigureWebHostDefaults on both the _deferredHostBuilder and _hostBuilder.
-                foreach (var s in _services)
+                foreach (var serivce in _services)
                 {
-                    services.Add(s);
+                    services.Add(serivce);
                 }
 
                 // Add the hosted services that were initially added last
                 // this makes sure any hosted services that are added run after the initial set
                 // of hosted services. This means hosted services run before the web host starts.
-                foreach (var s in _services.HostedServices)
+                foreach (var service in _services.HostedServices)
                 {
-                    services.Add(s);
+                    services.Add(service);
                 }
 
                 // Clear the hosted services list out
@@ -184,7 +185,7 @@ namespace Avalonia.Extensions.Hosting
                 {
                     // Something removed the _hostBuilder's TrackingChainedConfigurationSource pointing back to the ConfigurationManager.
                     // This is likely a test using WebApplicationFactory. Replicate the effect by clearing the ConfigurationManager sources.
-                    ((IConfigurationBuilder)Configuration).Sources.Clear();
+                    Configuration.Sources.Clear();
                 }
 
                 // Make builder.Configuration match the final configuration. To do that, we add the additional
