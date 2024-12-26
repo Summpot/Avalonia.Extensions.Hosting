@@ -98,13 +98,6 @@ namespace Avalonia.Extensions.Hosting
         /// <returns>A configured <see cref="AvaloniaApplication{TApplication,TWindow}"/>.</returns>
         public AvaloniaApplication<TApplication, TWindow> Build()
         {
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) &&
-                !Thread.CurrentThread.TrySetApartmentState(ApartmentState.STA))
-            {
-                Thread.CurrentThread.SetApartmentState(ApartmentState.Unknown);
-                Thread.CurrentThread.SetApartmentState(ApartmentState.STA);
-            }
-
             Services.AddHostedService<AvaloniaHostedService<TApplication, TWindow>>();
             Services.AddSingleton<Application, TApplication>(_ =>
             {

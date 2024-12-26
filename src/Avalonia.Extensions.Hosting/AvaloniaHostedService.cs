@@ -32,6 +32,10 @@ internal class AvaloniaHostedService<TApplication, TWindow> : IHostedService
         {
             desktop.MainWindow = _window;
             desktop.Start(_options.Args ?? []);
+            if (_window is not null)
+            {
+                _window.Closed += ((sender, args) => { _hostApplicationLifetime.StopApplication(); });
+            }
         }
 
         _hostApplicationLifetime.StopApplication();
