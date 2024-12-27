@@ -40,6 +40,10 @@ internal class AvaloniaHostedService<TApplication, TWindow> : IHostedService
 
     public Task StopAsync(CancellationToken cancellationToken)
     {
+        if (_window is not null)
+        {
+            _window.Close();
+        }
         return Task.CompletedTask;
     }
 }

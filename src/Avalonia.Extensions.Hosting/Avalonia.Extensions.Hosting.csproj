@@ -9,7 +9,7 @@
 		<Authors>Summpot</Authors>
 		<Company>Summpot</Company>
 		<PackageId>Extensions.Hosting.Avalonia</PackageId>
-		<Copyright>Copyright (c) .NET Foundation and Contributors</Copyright>
+		<Copyright>Copyright (c) Summpot and Contributors</Copyright>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageProjectUrl>https://github.com/Summpot/Avalonia.Extensions.Hosting</PackageProjectUrl>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
@@ -24,8 +24,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Avalonia" Version="11.0.10" />
-		<PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
+		<PackageReference Include="Avalonia" Version="11.2.3" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.0" />
 		<PackageReference Include="MinVer" Version="6.0.0">
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
